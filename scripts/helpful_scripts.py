@@ -1,11 +1,12 @@
 from filecmp import DEFAULT_IGNORES
-
 from brownie import (
     network,
     config,
     accounts,
     interface,
     Contract,
+    LinkToken,
+    VRFCoordinatorMock,
 )
 from web3 import Web3
 
@@ -36,6 +37,12 @@ def get_account(index=None, id=None):
     return accounts.add(config["wallets"]["from_key"])
 
 
+contract_to_mock = {
+    "vrf_coordinator": VRFCoordinatorMock,
+    "link_token": LinkToken,
+}
+
+
 def get_contract(contract_name):
     contract_type = contract_to_mock[contract_name]
 
@@ -60,11 +67,13 @@ def get_contract(contract_name):
 
 
 def deploy_mocks(decimals=DECIMALS, initial_value=INITIAL_VALUE):
+    print(f"The active network is {network.show_active()}")
+    print(f"Deploying mocks...")
     account = get_account()
-    MockV3Aggregator.deploy(decimals, initial_value, {"from": account})
+
     link_token = LinkToken.deploy({"from": account})
-    VRFCoordinatorMock.deploy(link_token.address, {"from": account})
-    print("Deployed!")
+    vrf_coordinator = VRFCoordinatorMock.deploy(link_token.address, {"from": account})
+    print("Deployed mocks!")
 
 
 def fund_with_link(
