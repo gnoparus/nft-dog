@@ -19,7 +19,7 @@ def test_advanced_collectible_integration():
     account = get_account()
     advanced_collectible, creating_tx = deploy_and_create_advance()
     ### emit requestCollectible(requestId, msg.sender)
-    time.sleep(60)
+    time.sleep(180)
 
     assert advanced_collectible.tokenCounter() == 1
     # assert advanced_collectible.tokenIdToBreed(0) == STATIC_RNG % 3
