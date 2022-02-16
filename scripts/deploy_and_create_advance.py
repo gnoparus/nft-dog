@@ -22,7 +22,7 @@ def deploy_and_create_advance():
     tx = advanced_collectible.createCollectible({"from": account})
     tx.wait(1)
     print(f"Created collectible")
-    return advanced_collectible
+    return advanced_collectible, tx
 
 
 def main():
