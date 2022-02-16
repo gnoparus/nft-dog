@@ -13,6 +13,7 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
         SHIBA_INU,
         ST_BERNARD
     }
+
     mapping(uint256 => Breed) public tokenIdToBreed;
     mapping(bytes32 => address) public requestIdToSender;
     event requestCollectible(bytes32 indexed requestId, address requester);
@@ -22,7 +23,7 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
         address _vrfCoordinator,
         address _linkToken,
         bytes32 _keyHash,
-        uint32 _fee
+        uint256 _fee
     )
         public
         VRFConsumerBase(_vrfCoordinator, _linkToken)
