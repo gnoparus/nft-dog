@@ -57,9 +57,10 @@ def create_metadata():
                 json.dump(collectible_metadata, file)
             json_uri = upload_to_ipfs(metadata_file_name)
 
-            advanced_collectible.setTokenURI(
+            settoken_tx = advanced_collectible.setTokenURI(
                 token_id, json_uri, {"from": get_account()}
             )
+            settoken_tx.wait(1)
         print(
             f"You can view your NFT at {OPENSEA_URL}/{advanced_collectible.address}/{token_id}"
         )
