@@ -11,6 +11,7 @@ from metadata import sample_metadata
 from pathlib import Path
 from metadata.sample_metadata import metadata_template
 import requests
+import json
 
 
 def upload_to_ipfs(filepath):
@@ -38,20 +39,30 @@ def create_metadata():
         )
         print(f"metada_file_name = {metadata_file_name}")
 
-        collectible_metada = metadata_template
+        collectible_metadata = metadata_template
         if Path(metadata_file_name).exists():
             print(f"{metadata_file_name} is already exists. Delete it to overwrite.")
         else:
             print(f"Creating metadata file {metadata_file_name}")
 
-            collectible_metada["name"] = breed
-            collectible_metada["description"] = f"Adoreble breed of {breed}"
-            collectible_metada["image_uri"] = ""
-            # print(f"collectible_metada = {collectible_metada}")
+            collectible_metadata["name"] = breed
+            collectible_metadata["description"] = f"Adoreble breed of {breed}"
+            collectible_metadata["image_uri"] = ""
+            # print(f"collectible_metadata = {collectible_metadata}")
             image_file_name = "./img/" + breed.lower().replace("_", "-") + ".png"
-            upload_to_ipfs(image_file_name)
+            image_uri = upload_to_ipfs(image_file_name)
+            collectible_metadata["image_uri"] = image_uri
 
-        # advanced_collectible.setTokenURI(token_id, "")
+            with open(metadata_file_name, "w") as file:
+                json.dump(collectible_metadata, file)
+            json_uri = upload_to_ipfs(metadata_file_name)
+
+            advanced_collectible.setTokenURI(
+                token_id, json_uri, {"from": get_account()}
+            )
+        print(
+            f"You can view your NFT at {OPENSEA_URL}/{advanced_collectible.address}/{token_id}"
+        )
 
 
 def main():
