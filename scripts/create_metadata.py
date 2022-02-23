@@ -66,5 +66,23 @@ def create_metadata():
         )
 
 
+def create_metadata_centralized():
+    advanced_collectible = AdvancedCollectible[-1]
+
+    token_id = 2
+    json_uri = "https://bualabs.com/dpu-9999333444/2-ST_BERNARD.json"
+
+    settoken_tx = advanced_collectible.setTokenURI(
+        token_id, json_uri, {"from": get_account()}
+    )
+
+    settoken_tx.wait(1)
+
+    print(
+        f"You can view your NFT at {OPENSEA_URL}/{advanced_collectible.address}/{token_id}"
+    )
+
+
 def main():
-    create_metadata()
+    # create_metadata()
+    create_metadata_centralized()
