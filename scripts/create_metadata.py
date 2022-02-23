@@ -66,11 +66,8 @@ def create_metadata():
         )
 
 
-def create_metadata_centralized():
+def create_metadata_centralized(token_id, json_uri):
     advanced_collectible = AdvancedCollectible[-1]
-
-    token_id = 2
-    json_uri = "https://bualabs.com/dpu-9999333444/2-ST_BERNARD.json"
 
     settoken_tx = advanced_collectible.setTokenURI(
         token_id, json_uri, {"from": get_account()}
@@ -85,4 +82,8 @@ def create_metadata_centralized():
 
 def main():
     # create_metadata()
-    create_metadata_centralized()
+
+    token_id = 2
+    json_uri = "https://bualabs.com/dpu-9999333444/2-ST_BERNARD.json"
+
+    create_metadata_centralized(token_id=token_id, json_uri=json_uri)
