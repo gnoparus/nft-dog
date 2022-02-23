@@ -83,6 +83,7 @@ def set_token_uri(token_id, json_uri):
 def main():
     create_metadata()
 
+    ### upload file to web server and change url belows.
     # token_id = 2
     # json_uri = "https://bualabs.com/dpu-9999333444/2-ST_BERNARD.json"
     # set_token_uri(token_id=token_id, json_uri=json_uri)
