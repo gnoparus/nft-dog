@@ -16,7 +16,7 @@ import time
 def test_advanced_collectible_integration():
     if network.show_active() in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
         pytest.skip()
-    account = get_account()
+    get_account()
     advanced_collectible, creating_tx = deploy_and_create_advance()
     ### emit requestCollectible(requestId, msg.sender)
     time.sleep(180)
