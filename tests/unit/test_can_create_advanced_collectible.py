@@ -10,7 +10,6 @@ from scripts.deploy_and_create_advance import deploy_and_create_advance
 from brownie import AdvancedCollectible, network, config
 from web3 import Web3
 import pytest
-import time
 
 STATIC_RNG = 779
 
