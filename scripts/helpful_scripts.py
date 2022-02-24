@@ -1,4 +1,3 @@
-from filecmp import DEFAULT_IGNORES
 from brownie import (
     network,
     config,
